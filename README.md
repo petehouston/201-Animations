@@ -21,6 +21,7 @@ Living document that I'll keep up-to-date, tracking useful articles and tutorial
  * [Animations in Flutter](https://proandroiddev.com/animations-in-flutter-6e02ee91a0b2) recreates the 12 principles of UX in Motion
  * [Orchestrating Multiple Animations](https://flutter.rocks/2018/03/14/orchestrating-multiple-animations-into-visual-enter-animation/) showcasing Staggered Animation with values for various effects (blur, curve etc.) on a profile page.
  * [Flutter Animations: The Basics](https://sergiandreplace.com/flutter-animations-the-basics/) from Sergi gives a good starting point
+ * [Flutter By Example: Animations](https://flutterbyexample.com/step-one-tweening)
 
 
 ## Common Animation Patterns
