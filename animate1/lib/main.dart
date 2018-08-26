@@ -11,8 +11,9 @@ class LogoApp extends StatefulWidget {
 
 class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
   Animation<double> animation;
+  Animation<Color> coloranim;
   AnimationController controller;
-  int count=0;
+  int count = 0;
 
   initState() {
     super.initState();
@@ -22,8 +23,43 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
       vsync: this,
     );
 
-    //animation = Tween(begin: 0.0, end: 100.0).animate(controller);
-    animation = controller;
+    // Example 1: Linear Animation, 0.0 to 1.0
+    //animation = controller;
+
+    // Example 2: Tween Animation, 0.0 to 100.0
+    animation = Tween(begin: 0.0, end: 320.0).animate(controller);
+
+    // Example 3: Non-Linear Animation, 0.0 to 1.0
+    //animation = new CurvedAnimation(parent: controller, curve: Curves.bounceIn);
+
+    // Example 4: ColorTween, black to white
+    // Don't forget to uncomment decorate to see effect
+    coloranim = ColorTween(
+      begin: Colors.black,
+      end: Colors.yellow,
+    ).animate(controller)
+      ..addListener(() {
+        setState(() {
+          // Update if state change impacts color
+        });
+      });
+    
+
+    // Example 5: Chained Tweens
+    /*
+    coloranim = ColorTween(
+      begin: Colors.black,
+      end: Colors.yellow,
+    ).chain(
+      CurveTween(curve: Curves.bounceIn)
+    ).animate(controller)
+    ..addListener(() {
+      setState(() {
+        // Update if state change impacts color
+      });
+    });
+    */
+
     animation.addListener(() {
       setState(() {
         count++;
@@ -35,16 +71,21 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
   }
 
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-          margin: EdgeInsets.symmetric(vertical: 10.0),
-          height: animation.value*20,
-          width: animation.value*20,
+    return Container(
+      // Uncomment for Example 4
+      //decoration: new BoxDecoration(color: coloranim.value),
+      margin: EdgeInsets.symmetric(vertical: 10.0),
+      child: Center(
+        child: Container(
+          height: animation.value,
+          width: animation.value,
           //child: FlutterLogo(),
           child: Image.asset(
             'images/dcnyc.png',
             fit: BoxFit.contain,
-          )),
+          ),
+        ),
+      )
     );
   }
 
@@ -55,5 +96,8 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
 }
 
 void main() {
-  runApp(LogoApp());
+  runApp(MaterialApp(
+    title: "Animation Demos",
+    home: LogoApp(),
+  ));
 }
