@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
-class FriendlyChatApp extends StatelessWidget{
+class FriendlyChatApp extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState() => 
+    new FriendlyChatAppState();
+}
+
+class FriendlyChatAppState extends State<FriendlyChatApp>{
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
