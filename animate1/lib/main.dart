@@ -12,28 +12,39 @@ class LogoApp extends StatefulWidget {
 class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
   Animation<double> animation;
   AnimationController controller;
+  int count=0;
 
   initState() {
     super.initState();
     controller = AnimationController(
-        duration: const Duration(milliseconds: 2000), vsync: this);
-    animation = Tween(begin: 0.0, end: 300.0).animate(controller)
-      ..addListener(() {
-        setState(() {
-          // the state that has changed here is the animation object’s value
-        });
+      value: 0.0,
+      duration: const Duration(milliseconds: 2000),
+      vsync: this,
+    );
+
+    //animation = Tween(begin: 0.0, end: 100.0).animate(controller);
+    animation = controller;
+    animation.addListener(() {
+      setState(() {
+        count++;
+        print("Animation value ${count}: ${animation.value}");
+        // the state that has changed here is the animation object’s value
       });
+    });
     controller.forward();
   }
 
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 10.0),
-        height: animation.value,
-        width: animation.value,
-        child: FlutterLogo(),
-      ),
+          margin: EdgeInsets.symmetric(vertical: 10.0),
+          height: animation.value*20,
+          width: animation.value*20,
+          //child: FlutterLogo(),
+          child: Image.asset(
+            'images/dcnyc.png',
+            fit: BoxFit.contain,
+          )),
     );
   }
 
